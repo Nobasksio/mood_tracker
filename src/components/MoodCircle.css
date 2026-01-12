@@ -1,0 +1,53 @@
+.mood-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  font-size: 10px;
+  color: #999;
+  padding: 0;
+}
+
+.mood-circle--empty {
+  border: 2px dashed #ddd;
+}
+
+.mood-circle--empty:hover:not(:disabled) {
+  border-color: #888;
+  background: #f5f5f5;
+}
+
+.mood-circle--filled {
+  border: 2px solid #e0e0e0;
+  background: #fff;
+}
+
+.mood-circle--filled:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mood-circle--today {
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.3);
+}
+
+.mood-circle--future {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mood-circle__emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.mood-circle__day {
+  font-size: 10px;
+  font-weight: 500;
+}

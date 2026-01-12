@@ -1,0 +1,27 @@
+.mood-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mood-grid__month {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.mood-grid__month-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mood-grid__days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
