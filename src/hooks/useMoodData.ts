@@ -1,31 +1,35 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { MoodData, MoodLevel, DayEntry } from '../types';
 
-const STORAGE_KEY = 'mood-tracker-data';
+const getStorageKey = (userId: string) => `mood-tracker-data-${userId}`;
 
-const loadFromStorage = (): MoodData => {
+const loadFromStorage = (userId: string): MoodData => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(getStorageKey(userId));
     return stored ? JSON.parse(stored) : {};
   } catch {
     return {};
   }
 };
 
-const saveToStorage = (data: MoodData): void => {
+const saveToStorage = (userId: string, data: MoodData): void => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(getStorageKey(userId), JSON.stringify(data));
   } catch {
     console.error('Failed to save mood data to localStorage');
   }
 };
 
-export const useMoodData = () => {
-  const [data, setData] = useState<MoodData>(() => loadFromStorage());
+export const useMoodData = (userId: string) => {
+  const [data, setData] = useState<MoodData>(() => loadFromStorage(userId));
 
   useEffect(() => {
-    saveToStorage(data);
-  }, [data]);
+    setData(loadFromStorage(userId));
+  }, [userId]);
+
+  useEffect(() => {
+    saveToStorage(userId, data);
+  }, [userId, data]);
 
   const setMood = useCallback((date: string, mood: MoodLevel) => {
     setData((prev) => ({

@@ -1,17 +1,27 @@
 import { useState } from 'react';
-import { MoodGrid } from './components';
+import { MoodGrid, UserSelector } from './components';
 import { useMoodData } from './hooks/useMoodData';
+import { useUsers } from './hooks/useUsers';
 import './App.css';
 
 function App() {
   const currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);
-  const { data, setMood, setCustomEmoji, setComment, clearMood } = useMoodData();
+  const { users, currentUserId, setCurrentUserId, addUser } = useUsers();
+  const { data, setMood, setCustomEmoji, setComment, clearMood } = useMoodData(currentUserId);
 
   return (
     <div className="app">
       <header className="app__header">
         <h1 className="app__title">Mood Tracker</h1>
+        <div className="app__controls">
+          <UserSelector
+            users={users}
+            currentUserId={currentUserId}
+            onSelectUser={setCurrentUserId}
+            onAddUser={addUser}
+          />
+        </div>
         <div className="app__year-selector">
           <button
             className="app__year-btn"

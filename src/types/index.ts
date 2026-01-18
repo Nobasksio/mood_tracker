@@ -14,3 +14,8 @@ export interface MoodOption {
 }
 
 export type MoodData = Record<string, DayEntry>;
+
+export interface User {
+  id: string;
+  name: string;
+}
